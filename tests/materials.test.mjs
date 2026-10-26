@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import * as T from '../docs/vendor/three.module.v3.js';
 import {createAnimal,animateModel} from '../docs/models.js';
 import {animalSpecies} from '../docs/data.js';
-import {SKIN_IDS,applyAnimalTexture} from '../docs/animal-materials.js?v=wildlife-v4';
+import {SKIN_IDS,applyAnimalTexture} from '../docs/animal-materials.js?v=wildlife-v4-2';
 import {textureAffine} from '../docs/software-renderer.js';
 const meshes=g=>{const r=[];g.traverse(o=>{if(o.isMesh)r.push(o);});return r;};
 

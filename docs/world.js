@@ -1,8 +1,8 @@
 import * as T from './vendor/three.module.v3.js';
-import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=wildlife-v4';
+import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=wildlife-v4-2';
 import {animalSpecies} from './data.js';
-import {loadAnimalTextures} from './animal-materials.js?v=wildlife-v4';
-import {SoftwareRenderer} from './software-renderer.js?v=wildlife-v4';
+import {loadAnimalTextures} from './animal-materials.js?v=wildlife-v4-2';
+import {SoftwareRenderer} from './software-renderer.js?v=wildlife-v4-2';
 
 export function createWorld(container,quality='high'){
  let renderer;try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});}catch{renderer=new SoftwareRenderer();}

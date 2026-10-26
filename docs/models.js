@@ -1,6 +1,6 @@
 /* Original procedural character and botanical models, made for Rainforest Expedition. */
 import * as THREE from './vendor/three.module.v3.js';
-import {finishAnimalMaterials} from './animal-materials.js?v=wildlife-v4';
+import {finishAnimalMaterials} from './animal-materials.js?v=wildlife-v4-2';
 const mats=new Map(), geos=new Map();
 function mat(c,roughness=.8){const k=c+':'+roughness;if(!mats.has(k))mats.set(k,new THREE.MeshStandardMaterial({color:c,roughness}));return mats.get(k);}
 function sphere(){if(!geos.has('s'))geos.set('s',new THREE.SphereGeometry(1,16,12));return geos.get('s');}
@@ -65,6 +65,7 @@ function refineAnatomy(g,id){
   for(const [i,leg]of p.legs.entries()){
    const old=leg.children.filter(o=>o.isMesh),length=Math.max(.24,leg.position.y-.1),color=old[0]?.material?.color?.getStyle()||'#86734c';for(const o of old)leg.remove(o);
    const hind=i%2===1,kneeZ=hind?-.15:.065,ankleZ=hind?.035:-.025;
+   const shoulder=ball(leg,color,0,-.025,0,.115,.21,.14);shoulder.geometry=organicGeometry('torso');
    const thigh=ball(leg,color,0,-length*.27,kneeZ*.45,.105,length*.34,.115);thigh.geometry=organicGeometry('torso');thigh.rotation.x=hind?-.3:.14;
    tube(leg,color,[[0,-length*.13,0],[0,-length*.5,kneeZ],[0,-length*.88,ankleZ]],.057);
    ball(leg,'#6f6651',0,-length*.95,ankleZ+.055,.085,.055,.135);
