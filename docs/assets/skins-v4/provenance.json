@@ -1,0 +1,43 @@
+{
+  "version": "Wildlife V4",
+  "generator": "Higgsfield GPT Image 2.5",
+  "kind": "AI-generated animal albedo; not field photography",
+  "estimatedCredits": 8.25,
+  "jobs": [
+    {
+      "index": 0,
+      "job_id": "16bc891f-3ab4-41a8-a994-56481c98372c",
+      "status": "completed"
+    },
+    {
+      "index": 1,
+      "job_id": "616004fa-a19d-4173-b62d-063138b8e197",
+      "status": "completed"
+    },
+    {
+      "index": 2,
+      "job_id": "b8333ec0-e62c-4904-8279-ba1e5c787075",
+      "status": "completed"
+    }
+  ],
+  "requests": [
+    {
+      "index": 0,
+      "prompt": "Use case: scientific-educational. Asset type: physically based 3D animal BASE COLOR texture atlas. Create EXACTLY 3 columns by 2 rows of equal square cells, no gutters, no borders, no labels, no text, no objects, no animal silhouettes, no eyes, no faces, no scenery. Every square is FILLED edge to edge by an ultra-realistic photographed animal surface viewed orthogonally at macro distance. Six flat texture swatches, not animals. Uniform diffuse neutral illumination across each cell, no highlights, no shadows, no vignettes. Fine crisp biological microstructure, naturally irregular variation; seamless tileable edges per cell. Preserve natural rich coloration, fine individual hairs/barbs/scales. No plastic, no cartoon, no painterly blur. Reading-order tiles: TOP LEFT jaguar short dense golden tawny fur with irregular large BLACK BROKEN RING ROSETTES, warm darker orange interior, many rosettes contain one or two small central black dots; varied organic size, show about 5 rosettes across, fine visible hairs run vertically. TOP MIDDLE ocelot silky pale ochre fur with long narrow irregular dark brown black-edged chain rosettes running vertically, distinct from jaguar round rosettes. TOP RIGHT lowland paca chestnut brown coarse short fur with FOUR VERTICAL STRAIGHT ROWS of creamy-white oval spots, fine hairs, brown spaces. BOTTOM LEFT white-nosed coati warm rusty brown dense coarse fur, subtle dark guard hairs, strand flow vertical, no large stripes. BOTTOM MIDDLE Hoffmann two-toed sloth long shaggy taupe brown and gray guard hairs, subtly moss tinted, long irregular tufts flowing downward, realistic deep fiber detail. BOTTOM RIGHT unpatterned soft short warm ivory mammal belly fur with individual fine vertical cream hairs.",
+      "quality": "high",
+      "resolution": "2k"
+    },
+    {
+      "index": 1,
+      "prompt": "Use case: scientific-educational. Asset type: physically based 3D animal BASE COLOR texture atlas. Create EXACTLY 3 columns by 2 rows of equal square cells, no gutters, no borders, no labels, no text, no objects, no animal silhouettes, no eyes, no faces, no scenery. Every square is FILLED edge to edge by an ultra-realistic photographed animal surface viewed orthogonally at macro distance. Six flat texture swatches, not animals. Uniform diffuse neutral illumination across each cell, no highlights, no shadows, no vignettes. Fine crisp biological microstructure, naturally irregular variation; seamless tileable edges per cell. Preserve natural rich coloration, fine individual hairs/barbs/scales. No plastic, no cartoon, no painterly blur. Reading-order tiles: TOP LEFT Central American agouti natural copper orange brown coarse agouti fur, individual black tipped and golden hairs, strong biological fine grain and vertical flow. TOP MIDDLE collared peccary slate charcoal gray coarse bristly hide, salt-and-pepper guard hairs and faint warm brown undercoat, no white stripe. TOP RIGHT adult Baird tapir dark warm gray brown hide with extremely fine short sparse hairs, subtle fine pores, natural mottling, not elephant cracks, no pale Malayan saddle. BOTTOM LEFT spectacled owl warm dark chocolate and chestnut feather plumage, tightly layered small contour feathers with restrained tawny barred edges, shafts and individual fine barbs visible, flowing vertically. BOTTOM MIDDLE harpy eagle slate charcoal gray overlapping contour feathers, subtle natural gray edge bands and crisp feather shafts and barbs, vertical orientation. BOTTOM RIGHT soft unpatterned ivory white bird breast contour feathers, small layered feathers, shafts and fine barbs, vertical flow.",
+      "quality": "high",
+      "resolution": "2k"
+    },
+    {
+      "index": 2,
+      "prompt": "Use case: scientific-educational. Asset type: physically based 3D animal BASE COLOR texture atlas. Create EXACTLY 3 columns by 2 rows of equal square cells, no gutters, no borders, no labels, no text, no objects, no animal silhouettes, no eyes, no faces, no scenery. Every square is FILLED edge to edge by an ultra-realistic photographed animal surface viewed orthogonally at macro distance. Six flat texture swatches, not animals. Uniform diffuse neutral illumination across each cell, no highlights, no shadows, no vignettes. Fine crisp biological microstructure, naturally irregular variation; seamless tileable edges per cell. Preserve natural rich coloration, fine individual hairs/barbs/scales. No plastic, no cartoon, no painterly blur. Reading-order tiles: TOP LEFT green iguana richly varied moss green and olive tiny irregular polygon scales, individual slightly raised scales with fine dark interstitial lines, small brown mottling and subtle green gradations, no large diamonds. TOP MIDDLE boa constrictor tan and warm brown scales with irregular dark chocolate saddle markings across the vertical body direction, about four saddle markings from top to bottom, each tiny overlapping scale visible, no face. TOP RIGHT red-eyed tree frog vibrant fresh leaf green skin, very fine satin moist-looking granular pores, slight yellow-green natural variation, skin not reptile scales and no large bumps. BOTTOM LEFT grasshopper natural olive emerald green chitin with fine ridged wing venation, faint golden brown longitudinal striations and tiny irregular pores, vertical veins. BOTTOM MIDDLE keel billed toucan glossy charcoal almost-black small overlapping contour feathers, faint natural blue green iridescence, fine feather shafts and barbs visible, vertical orientation. BOTTOM RIGHT warm yellow bird throat plumage with fine overlapping soft feathers and detailed barbs, no eyes.",
+      "quality": "high",
+      "resolution": "2k"
+    }
+  ]
+}

@@ -1,6 +1,15 @@
 // Lightweight CPU projection fallback. Main experience uses Three.js WebGLRenderer.
 // This keeps navigation and learning usable when the browser disables WebGL.
 import * as T from './vendor/three.module.v3.js';
+// UV-correct affine triangles keep the *actual coat texture* visible on shaped
+// BufferGeometry even when WebGL is unavailable. Small triangles limit warping.
+export function textureAffine(screen,uv,width,height){
+ const [p,q,r]=screen,[a,b,c]=uv.map(([u,v])=>[u*width,(1-v)*height]);
+ const bx=b[0]-a[0],by=b[1]-a[1],cx=c[0]-a[0],cy=c[1]-a[1],det=bx*cy-cx*by;if(Math.abs(det)<1e-7)return null;
+ const dx=q.x-p.x,dy=q.y-p.y,ex=r.x-p.x,ey=r.y-p.y;
+ const A=(dx*cy-ex*by)/det,B=(dy*cy-ey*by)/det,C=(ex*bx-dx*cx)/det,D=(ey*bx-dy*cx)/det;
+ return [A,B,C,D,p.x-A*a[0]-C*a[1],p.y-B*a[0]-D*a[1]];
+}
 export class SoftwareRenderer{
  constructor(){this.domElement=document.createElement('canvas');this.ctx=this.domElement.getContext('2d');this.shadowMap={};this.ratio=1;this.w=800;this.h=600;this.isSoftware=true;this.frame=0;this.list=[];this.cache=new WeakMap();}
  setPixelRatio(r){this.ratio=Math.min(r,1);}
@@ -19,7 +28,7 @@ export class SoftwareRenderer{
    if(type==='RingGeometry'){
     const pts=[];for(let i=0;i<=24;i++){const a=i/24*Math.PI*2;pts.push(project(Math.cos(a)*param.outerRadius,Math.sin(a)*param.outerRadius,0,o.matrixWorld));}if(pts.some(p=>p.depth<.2))return;draw.push({z:c.depth,fn:()=>{ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle=color;ctx.globalAlpha=opacity;ctx.lineWidth=2;ctx.stroke();}});return;
    }
-   if(type==='TubeGeometry'){
+   if(type==='TubeGeometry'&&!m.userData?.skinKey){
     const pts=param.path.getPoints(7).map(p=>project(p.x,p.y,p.z,o.matrixWorld));if(pts.some(p=>p.depth<.2))return;const a=project(param.radius||.03,0,0,o.matrixWorld);const width=Math.max(.7,Math.hypot(a.x-c.x,a.y-c.y)*2);draw.push({z:c.depth,fn:()=>{ctx.beginPath();pts.filter(p=>p.z<1&&p.z>-1).forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.lineWidth=width;ctx.lineCap='round';ctx.strokeStyle=color;ctx.stroke();}});return;
    }
    if(type==='SphereGeometry'||type==='IcosahedronGeometry'||type==='DodecahedronGeometry'){
@@ -28,7 +37,18 @@ export class SoftwareRenderer{
    if(type==='CylinderGeometry'||type==='ConeGeometry'){
     const hh=param.height/2,rt=param.radiusTop??0,rb=param.radiusBottom??param.radius??1;const a=project(0,hh,0,o.matrixWorld),b=project(0,-hh,0,o.matrixWorld),aa=project(rt,hh,0,o.matrixWorld),bb=project(rb,-hh,0,o.matrixWorld);if([a,b,aa,bb].some(p=>p.depth<.2))return;const ra=Math.max(.5,Math.hypot(aa.x-a.x,aa.y-a.y)),rr=Math.max(.5,Math.hypot(bb.x-b.x,bb.y-b.y));if(ra>w||rr>w)return;const angle=Math.atan2(b.y-a.y,b.x-a.x)+Math.PI/2;const nx=Math.cos(angle),ny=Math.sin(angle);draw.push({z:c.depth,fn:()=>{ctx.beginPath();ctx.moveTo(a.x+nx*ra,a.y+ny*ra);ctx.lineTo(a.x-nx*ra,a.y-ny*ra);ctx.lineTo(b.x-nx*rr,b.y-ny*rr);ctx.lineTo(b.x+nx*rr,b.y+ny*rr);ctx.closePath();ctx.fillStyle=color;ctx.fill();}});return;
    }
-   const pos=g.attributes.position,index=g.index;if(!pos)return;const count=index?index.count:pos.count;for(let i=0;i<count;i+=3){const verts=[];for(let k=0;k<3;k++){const j=index?index.getX(i+k):i+k;verts.push(project(pos.getX(j),pos.getY(j),pos.getZ(j),o.matrixWorld));}if(verts.some(p=>p.depth<.2||p.depth>camera.far))continue;if(verts.every(p=>p.x<0)||verts.every(p=>p.x>w)||verts.every(p=>p.y<0)||verts.every(p=>p.y>h))continue;const z=verts.reduce((a,p)=>a+p.depth,0)/3;draw.push({z,fn:()=>{ctx.beginPath();verts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=color;ctx.fill();}});}
+   const pos=g.attributes.position,index=g.index;if(!pos)return;const count=index?index.count:pos.count,uv=g.attributes.uv,normal=g.attributes.normal;
+   const image=m.map?.image,hasTexture=!!(m.userData?.skinKey&&image&&image.complete&&image.naturalWidth&&uv);
+   let pattern=null;if(hasTexture){pattern=this.cache.get(image);if(!pattern){pattern=ctx.createPattern(image,'repeat');this.cache.set(image,pattern);}}
+   const points=Array.from({length:pos.count},(_,i)=>project(pos.getX(i),pos.getY(i),pos.getZ(i),o.matrixWorld));
+   const nm=new T.Matrix3().getNormalMatrix(o.matrixWorld),light=new T.Vector3(-.35,.8,.45).normalize();
+   for(let i=0;i<count;i+=3){const ids=[0,1,2].map(k=>index?index.getX(i+k):i+k),verts=ids.map(j=>points[j]);if(verts.some(p=>p.depth<.2||p.depth>camera.far))continue;if(verts.every(p=>p.x<0)||verts.every(p=>p.x>w)||verts.every(p=>p.y<0)||verts.every(p=>p.y>h))continue;
+    const area=(verts[1].x-verts[0].x)*(verts[2].y-verts[0].y)-(verts[1].y-verts[0].y)*(verts[2].x-verts[0].x);if(m.userData?.skinKey&&m.side===T.FrontSide&&area>=0)continue;if(Math.abs(area)<.05)continue;
+    const z=verts.reduce((a,p)=>a+p.depth,0)/3,coords=uv?ids.map(j=>[uv.getX(j),uv.getY(j)]):null;
+    let shade=1;if(m.userData?.skinKey&&normal){const n=new T.Vector3();for(const j of ids)n.add(new T.Vector3().fromBufferAttribute(normal,j));n.applyMatrix3(nm).normalize();shade=.69+.29*Math.max(0,n.dot(light));}
+    const affine=hasTexture?textureAffine(verts,coords,image.naturalWidth,image.naturalHeight):null;
+    draw.push({z,fn:()=>{ctx.save();ctx.beginPath();verts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.fillStyle=color;ctx.fill();if(affine&&pattern){ctx.clip();ctx.save();ctx.transform(...affine);ctx.fillStyle=pattern;const xs=coords.map(c=>c[0]*image.naturalWidth),ys=coords.map(c=>(1-c[1])*image.naturalHeight);ctx.fillRect(Math.min(...xs)-1,Math.min(...ys)-1,Math.max(...xs)-Math.min(...xs)+2,Math.max(...ys)-Math.min(...ys)+2);ctx.restore();if(color!=='#ffffff'){ctx.globalCompositeOperation='multiply';ctx.fillStyle=color;ctx.fill();ctx.globalCompositeOperation='source-over';}if(shade<1){ctx.fillStyle=`rgba(16,25,20,${1-shade})`;ctx.fill();}}ctx.restore();}});
+   }
   });
   draw.sort((a,b)=>b.z-a.z);for(const d of draw){ctx.globalAlpha=1;d.fn();}ctx.globalAlpha=1;
  }

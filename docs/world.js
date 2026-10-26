@@ -1,15 +1,16 @@
 import * as T from './vendor/three.module.v3.js';
-import {createAnimal,createExplorer,createPlant,animateModel,applySurfaceTextures} from './models.js?v=github-v3-1';
+import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=wildlife-v4';
 import {animalSpecies} from './data.js';
-import {SoftwareRenderer} from './software-renderer.js?v=github-v3-1';
+import {loadAnimalTextures} from './animal-materials.js?v=wildlife-v4';
+import {SoftwareRenderer} from './software-renderer.js?v=wildlife-v4';
 
 export function createWorld(container,quality='high'){
  let renderer;try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});}catch{renderer=new SoftwareRenderer();}
- renderer.setPixelRatio(Math.min(devicePixelRatio,quality==='low'?1:1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=quality!=='low';renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;container.append(renderer.domElement);
- const textureLoader=new T.TextureLoader();const surfaces={};for(const key of ['scales','fur','feathers']){textureLoader.load(`./assets/surfaces/${key}.webp`,texture=>{texture.wrapS=texture.wrapT=T.RepeatWrapping;texture.repeat.set(key==='fur'?3:2,key==='fur'?3:2);texture.colorSpace=T.SRGBColorSpace;texture.anisotropy=4;surfaces[key]=texture;applySurfaceTextures(surfaces);},undefined,()=>console.warn('Surface texture unavailable:',key));}
+ renderer.setPixelRatio(Math.min(devicePixelRatio,quality==='low'?1:1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=quality!=='low';renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.04;container.append(renderer.domElement);
+ const textures=loadAnimalTextures(renderer);
  const scene=new T.Scene();scene.background=new T.Color('#a3c4a3');scene.fog=new T.FogExp2('#9cbb98',.019);
- const camera=new T.PerspectiveCamera(48,innerWidth/innerHeight,.1,150);const hemi=new T.HemisphereLight('#e0f4d7','#486c3c',2.4);scene.add(hemi);
- const sun=new T.DirectionalLight('#fff0c2',3.4);sun.position.set(-22,38,15);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-40;sun.shadow.camera.right=40;sun.shadow.camera.top=40;sun.shadow.camera.bottom=-40;sun.shadow.normalBias=.1;sun.shadow.bias=-.0004;scene.add(sun);
+ const camera=new T.PerspectiveCamera(48,innerWidth/innerHeight,.1,150);const hemi=new T.HemisphereLight('#e0f4d7','#64715d',1.7);scene.add(hemi);
+ const sun=new T.DirectionalLight('#fff4df',2.7);sun.position.set(-22,38,15);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.camera.left=-40;sun.shadow.camera.right=40;sun.shadow.camera.top=40;sun.shadow.camera.bottom=-40;sun.shadow.normalBias=.1;sun.shadow.bias=-.0004;scene.add(sun);
  const mats=new Map();function mat(c,extra={}){const key=c+JSON.stringify(extra);if(!mats.has(key))mats.set(key,new T.MeshStandardMaterial({color:c,roughness:.95,...extra}));return mats.get(key);}
  const meshes=[];const solids=[];const plants=[];const animals=[];const decorations=[];
  function mesh(geo,m,x=0,y=0,z=0,parent=scene){const o=new T.Mesh(geo,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
@@ -90,5 +91,5 @@ export function createWorld(container,quality='high'){
  function resize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
  function pickGround(x,y){camera.updateMatrixWorld();cameraRay.setFromCamera(new T.Vector2(x/innerWidth*2-1,1-y/innerHeight*2),camera);const out=new T.Vector3();return cameraRay.ray.intersectPlane(new T.Plane(new T.Vector3(0,1,0),0),out)?out:null;}
  function inputToward(x,z){const dx=x-player.x,dz=z-player.z;const len=Math.hypot(dx,dz)||1;return {x:(Math.cos(theta)*dx-Math.sin(theta)*dz)/len,y:(-Math.sin(theta)*dx-Math.cos(theta)*dz)/len};}
- return {focusAnimal:a=>{focused=a;distance=a?4.5:9.3;pitch=.25;},scene,camera,renderer,player,animals,plants,portraits,observe,highlight,update,zone,resize,pickGround,inputToward,render:()=>renderer.render(scene,camera),rotate:(dx,dy)=>{theta-=dx*.006;pitch=T.MathUtils.clamp(pitch+dy*.004,.22,.94);},zoom:d=>distance=T.MathUtils.clamp(distance+d,5,15),center:()=>{theta=0;pitch=.52;distance=9.3;},home:()=>{focused=null;player.set(0,0,24);initialCamera();},setQuality:q=>{renderer.setPixelRatio(Math.min(devicePixelRatio,q==='low'?1:1.5));renderer.shadowMap.enabled=q!=='low';resize();}};
+ return {textures,focusAnimal:a=>{focused=a;distance=a?Math.max(1.7,new T.Box3().setFromObject(a.model).getSize(new T.Vector3()).length()*1.25):9.3;pitch=.25;},scene,camera,renderer,player,animals,plants,portraits,observe,highlight,update,zone,resize,pickGround,inputToward,render:()=>renderer.render(scene,camera),rotate:(dx,dy)=>{theta-=dx*.006;pitch=T.MathUtils.clamp(pitch+dy*.004,.22,.94);},zoom:d=>distance=T.MathUtils.clamp(distance+d,focused?1.35:5,15),center:()=>{theta=0;pitch=.52;distance=9.3;},home:()=>{focused=null;player.set(0,0,24);initialCamera();},setQuality:q=>{renderer.setPixelRatio(Math.min(devicePixelRatio,q==='low'?1:1.5));renderer.shadowMap.enabled=q!=='low';resize();}};
 }
