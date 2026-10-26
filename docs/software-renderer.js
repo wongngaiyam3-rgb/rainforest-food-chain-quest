@@ -1,6 +1,6 @@
 // Lightweight CPU projection fallback. Main experience uses Three.js WebGLRenderer.
 // This keeps navigation and learning usable when the browser disables WebGL.
-import * as T from './vendor/three.module.js';
+import * as T from './vendor/three.module.v3.js';
 export class SoftwareRenderer{
  constructor(){this.domElement=document.createElement('canvas');this.ctx=this.domElement.getContext('2d');this.shadowMap={};this.ratio=1;this.w=800;this.h=600;this.isSoftware=true;this.frame=0;this.list=[];this.cache=new WeakMap();}
  setPixelRatio(r){this.ratio=Math.min(r,1);}

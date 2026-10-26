@@ -1,4 +1,4 @@
-import {createWorld} from './world.js?v=anatomy-v3';
+import {createWorld} from './world.js?v=github-v3-1';
 import {species,animalSpecies,byId,checkChain,cleanSave,STORAGE,sources} from './data.js';
 
 const $=s=>document.querySelector(s);let save=cleanSave(null),storageOK=true;

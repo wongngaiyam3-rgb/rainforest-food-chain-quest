@@ -1,5 +1,5 @@
 /* Original procedural character and botanical models, made for Rainforest Expedition. */
-import * as THREE from './vendor/three.module.js';
+import * as THREE from './vendor/three.module.v3.js';
 const mats=new Map(), geos=new Map();
 function mat(c,roughness=.8){const k=c+':'+roughness;if(!mats.has(k))mats.set(k,new THREE.MeshStandardMaterial({color:c,roughness}));return mats.get(k);}
 function sphere(){if(!geos.has('s'))geos.set('s',new THREE.SphereGeometry(1,16,12));return geos.get('s');}

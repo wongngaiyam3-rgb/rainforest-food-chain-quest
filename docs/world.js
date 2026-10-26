@@ -1,7 +1,7 @@
-import * as T from './vendor/three.module.js';
-import {createAnimal,createExplorer,createPlant,animateModel,applySurfaceTextures} from './models.js?v=anatomy-v3';
+import * as T from './vendor/three.module.v3.js';
+import {createAnimal,createExplorer,createPlant,animateModel,applySurfaceTextures} from './models.js?v=github-v3-1';
 import {animalSpecies} from './data.js';
-import {SoftwareRenderer} from './software-renderer.js';
+import {SoftwareRenderer} from './software-renderer.js?v=github-v3-1';
 
 export function createWorld(container,quality='high'){
  let renderer;try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});}catch{renderer=new SoftwareRenderer();}
