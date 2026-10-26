@@ -1,4 +1,4 @@
-import {createWorld} from './world.js?v=wildlife-v4-2';
+import {createWorld} from './world.js?v=wildlife-v4-3';
 import {species,animalSpecies,byId,checkChain,cleanSave,STORAGE,sources} from './data.js';
 
 const $=s=>document.querySelector(s);let save=cleanSave(null),storageOK=true;

@@ -4,8 +4,8 @@ import {readFile} from 'node:fs/promises';
 import * as T from '../docs/vendor/three.module.v3.js';
 import {createAnimal,animateModel} from '../docs/models.js';
 import {animalSpecies} from '../docs/data.js';
-import {SKIN_IDS,applyAnimalTexture} from '../docs/animal-materials.js?v=wildlife-v4-2';
-import {textureAffine} from '../docs/software-renderer.js';
+import {SKIN_IDS,applyAnimalTexture} from '../docs/animal-materials.js?v=wildlife-v4-3';
+import {textureAffine,SoftwareRenderer} from '../docs/software-renderer.js';
 const meshes=g=>{const r=[];g.traverse(o=>{if(o.isMesh)r.push(o);});return r;};
 
 test('15 animated species use their own coat, valid UVs and finite anatomy',()=>{
@@ -28,4 +28,13 @@ test('all new albedo and relief assets are complete WebP images',async()=>{
 test('Canvas fallback maps UV vertices to the correct screen triangle',()=>{
  const screen=[{x:5,y:8},{x:80,y:10},{x:20,y:90}],uv=[[0,0],[1,0],[0,1]],m=textureAffine(screen,uv,640,640);assert.ok(m);
  uv.forEach(([u,v],i)=>{const x=u*640,y=(1-v)*640;assert.ok(Math.abs(m[0]*x+m[2]*y+m[4]-screen[i].x)<1e-6);assert.ok(Math.abs(m[1]*x+m[3]*y+m[5]-screen[i].y)<1e-6);});assert.equal(textureAffine(screen,[[0,0],[0,0],[0,0]],640,640),null);
+});
+test('Canvas fallback textures cones, cylinders and tubes instead of leaving them white',()=>{
+ let transforms=0;
+ const context=new Proxy({createLinearGradient:()=>({addColorStop(){}}),createPattern:()=>({}),transform(){transforms++;}}, {get:(target,key)=>key in target?target[key]:()=>{},set:(target,key,value)=>(target[key]=value,true)});
+ const previous=globalThis.document;globalThis.document={createElement:()=>({style:{},getContext:()=>context})};
+ try{const renderer=new SoftwareRenderer(),scene=new T.Scene(),camera=new T.PerspectiveCamera(45,1,.1,30);renderer.setSize(600,600);camera.position.set(2,2,5);camera.lookAt(0,0,0);camera.updateMatrixWorld();
+  const curve=new T.CatmullRomCurve3([new T.Vector3(0,-1,0),new T.Vector3(.2,0,0),new T.Vector3(0,1,0)]);
+  for(const geometry of [new T.ConeGeometry(.5,1,12),new T.CylinderGeometry(.3,.4,1,12),new T.TubeGeometry(curve,10,.15,8,false)]){scene.clear();const texture=new T.Texture();texture.image={complete:true,naturalWidth:640,naturalHeight:640};const material=new T.MeshStandardMaterial({map:texture});material.userData.skinKey='iguana';scene.add(new T.Mesh(geometry,material));transforms=0;renderer.render(scene,camera);assert.ok(transforms>0,`${geometry.type} lost its actual skin texture`);}
+ }finally{if(previous===undefined)delete globalThis.document;else globalThis.document=previous;}
 });
