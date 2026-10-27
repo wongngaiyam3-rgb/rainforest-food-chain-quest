@@ -4,12 +4,12 @@ import {readFile} from 'node:fs/promises';
 import * as T from '../docs/vendor/three.module.v3.js';
 import {createAnimal,animateModel} from '../docs/models.js';
 import {animalSpecies} from '../docs/data.js';
-import {SKIN_IDS,applyAnimalTexture} from '../docs/animal-materials.js?v=tripo-h31';
+import {SKIN_IDS,applyAnimalTexture} from '../docs/animal-materials.js?v=tripo-all-v6';
 import {textureAffine,SoftwareRenderer} from '../docs/software-renderer.js';
 const meshes=g=>{const r=[];g.traverse(o=>{if(o.isMesh)r.push(o);});return r;};
 
-test('15 animated species use their own coat, valid UVs and finite anatomy',()=>{
- assert.equal(animalSpecies.length,15);
+test('11 remaining species use their own coat, valid UVs and finite anatomy',()=>{
+ assert.equal(animalSpecies.length,11);
  for(const {id} of animalSpecies){const g=createAnimal(id),body=meshes(g).filter(m=>m.userData.skinKey===id);assert.ok(body.length,`${id}: body has no own coat`);
   for(const m of body){assert.ok(m.geometry.attributes.uv,`${id}: missing UV coordinates`);assert.ok([...m.geometry.attributes.uv.array].every(Number.isFinite));}
   for(const t of [0,.7,8.2]){animateModel(g,t,1);g.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(g),size=bounds.getSize(new T.Vector3());assert.ok([...bounds.min.toArray(),...bounds.max.toArray()].every(Number.isFinite));assert.ok(size.toArray().every(n=>n>.1&&n<8));}

@@ -1,8 +1,8 @@
 import * as T from './vendor/three.module.v3.js';
-import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=tripo-h31';
-import {animalSpecies} from './data.js';
-import {loadAnimalTextures} from './animal-materials.js?v=tripo-h31';
-import {SoftwareRenderer} from './software-renderer.js?v=tripo-h31';
+import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=tripo-all-v6';
+import {animalSpecies} from './data.js?v=tripo-all-v6';
+import {loadAnimalTextures} from './animal-materials.js?v=tripo-all-v6';
+import {SoftwareRenderer} from './software-renderer.js?v=tripo-all-v6';
 
 export function createWorld(container,quality='high'){
  let renderer;try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});}catch{renderer=new SoftwareRenderer();}
@@ -50,7 +50,7 @@ export function createWorld(container,quality='high'){
  for(let i=0;i<38;i++){const x=(rnd()-.5)*70,z=(rnd()-.5)*70;if(distanceToRoute(x,z)<2.5||Math.hypot(x,z-24)<6)continue;const rock=mesh(new T.DodecahedronGeometry(.4+rnd()*.6,0),mat('#819173'),x,.25,z);rock.scale.y=.6;}
  function plant(id,x,z,scale=1){const g=createPlant(id);g.position.set(x,0,z);g.scale.setScalar(scale);scene.add(g);plants.push({id,model:g,point:new T.Vector3(x,.5,z),radius:id==='fig'?4.3:3.4});return g;}
  plant('broadleaf',3.1,19,1.2);plant('broadleaf',-7,12,1.4);plant('broadleaf',-14,5,1.4);plant('broadleaf',13,4,1.4);plant('broadleaf',14,-2,1.2);plant('fig',-18,-7,1.1);plant('fig',-15,-14,1.1);plant('fig',-5,-20,1);
- const animalDefs=[['grasshopper',4.2,16,0],['grasshopper',-8,10,0],['grasshopper',-12,4,0],['grasshopper',13,2,0],['iguana',-13,7,0],['iguana',-17,0,0],['sloth',-18,-11,1.3],['sloth',-14,-13,1.3],['frog',14,2,.55],['frog',15,-2,.5],['frog',12,0,.4],['owl',10,-12,2.0],['harpy',-1.5,-23,2.0],['agouti',-5,18,0],['agouti',-9,13,0],['paca',-19,0,0],['tapir',14,12,0],['peccary',-17,4,0],['coati',7,9,0],['toucan',-13,-8,2],['boa',13,-7,0],['ocelot',-12,-18,0],['jaguar',3,-22,0]];
+ const animalDefs=[["grasshopper",4.2,16,0],["grasshopper",-8,10,0],["grasshopper",-12,4,0],["grasshopper",13,2,0],["iguana",-13,7,0],["iguana",-17,0,0],["frog",14,2,0.55],["frog",15,-2,0.5],["frog",12,0,0.4],["harpy",-1.5,-23,2.0],["agouti",-5,18,0],["agouti",-9,13,0],["tapir",14,12,0],["peccary",-17,4,0],["coati",7,9,0],["toucan",-13,-8,2],["boa",13,-7,0],["jaguar",3,-22,0]];
  for(let i=0;i<animalDefs.length;i++){
   const [id,x,z,y]=animalDefs[i];const g=createAnimal(id);g.position.set(x,y,z);g.rotation.y=rnd()*6.28;const scale={grasshopper:.38,frog:.52,iguana:1.1,sloth:1.05,owl:.9,harpy:1.25,agouti:.8,paca:.85,tapir:1.35,peccary:1.05,coati:1,toucan:.95,boa:1.1,ocelot:1.05,jaguar:1.3}[id]||1;g.scale.setScalar(scale);g.userData.sceneModelVersion='anatomy-v3';scene.add(g);
   const a={id,model:g,home:new T.Vector3(x,y,z),point:new T.Vector3(x,y+.5,z),radius:4.3,phase:rnd()*20,index:i,moving:0};animals.push(a);
@@ -91,5 +91,5 @@ export function createWorld(container,quality='high'){
  function resize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
  function pickGround(x,y){camera.updateMatrixWorld();cameraRay.setFromCamera(new T.Vector2(x/innerWidth*2-1,1-y/innerHeight*2),camera);const out=new T.Vector3();return cameraRay.ray.intersectPlane(new T.Plane(new T.Vector3(0,1,0),0),out)?out:null;}
  function inputToward(x,z){const dx=x-player.x,dz=z-player.z;const len=Math.hypot(dx,dz)||1;return {x:(Math.cos(theta)*dx-Math.sin(theta)*dz)/len,y:(-Math.sin(theta)*dx-Math.cos(theta)*dz)/len};}
- return {textures,focusAnimal:a=>{focused=a;distance=a?Math.max(1.7,new T.Box3().setFromObject(a.model).getSize(new T.Vector3()).length()*1.25):9.3;pitch=.25;},scene,camera,renderer,player,animals,plants,portraits,observe,highlight,update,zone,resize,pickGround,inputToward,render:()=>renderer.render(scene,camera),rotate:(dx,dy)=>{theta-=dx*.006;pitch=T.MathUtils.clamp(pitch+dy*.004,.22,.94);},zoom:d=>distance=T.MathUtils.clamp(distance+d,focused?1.35:5,15),center:()=>{theta=0;pitch=.52;distance=9.3;},home:()=>{focused=null;player.set(0,0,24);initialCamera();},setQuality:q=>{renderer.setPixelRatio(Math.min(devicePixelRatio,q==='low'?1:1.5));renderer.shadowMap.enabled=q!=='low';resize();}};
+ return {textures,focusAnimal:a=>{focused=a;distance=a?Math.max(1.7,new T.Box3().setFromObject(a.model).getSize(new T.Vector3()).length()*1.25/Math.min(1,camera.aspect)):9.3;pitch=.25;},scene,camera,renderer,player,animals,plants,portraits,observe,highlight,update,zone,resize,pickGround,inputToward,render:()=>renderer.render(scene,camera),rotate:(dx,dy)=>{theta-=dx*.006;pitch=T.MathUtils.clamp(pitch+dy*.004,.22,.94);},zoom:d=>distance=T.MathUtils.clamp(distance+d,focused?1.35:5,15),center:()=>{theta=0;pitch=.52;distance=9.3;},home:()=>{focused=null;player.set(0,0,24);initialCamera();},setQuality:q=>{renderer.setPixelRatio(Math.min(devicePixelRatio,q==='low'?1:1.5));renderer.shadowMap.enabled=q!=='low';resize();}};
 }

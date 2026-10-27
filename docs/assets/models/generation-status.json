@@ -1,0 +1,35 @@
+{
+  "provider": "Tripo H3.1 via Higgsfield",
+  "available": [
+    "jaguar",
+    "grasshopper",
+    "iguana",
+    "frog",
+    "harpy",
+    "agouti",
+    "tapir",
+    "peccary",
+    "coati",
+    "toucan",
+    "boa"
+  ],
+  "submitted": {},
+  "not_submitted": [],
+  "rigging": false,
+  "animations": false,
+  "estimatedNewCredits": 162,
+  "completed_jobs": {
+    "jaguar": "5b5d00f5-6d9f-4a81-9774-c3ab1c64ce02",
+    "grasshopper": "e003aaea-889f-4c95-9b88-8786559d5f86",
+    "iguana": "3e9746e9-05c4-4277-ac49-5401ffbe07fb",
+    "frog": "facaa3f0-a0a9-406c-a301-deb2c8cfd604",
+    "harpy": "230b0d53-aefc-49cf-97fb-3afb353ff371",
+    "agouti": "580decfe-037e-48fd-8f37-6f57f5bebc99",
+    "tapir": "02958e0b-ce97-45ee-974d-76f878706515",
+    "peccary": "e7935b96-0570-4872-8593-9dfc5155400d",
+    "coati": "898618e8-7c33-4884-a754-c57156bf3077",
+    "toucan": "64af98f2-1f13-4e9f-bec8-dea6a8745f45",
+    "boa": "c27fcbac-fabb-4160-a958-dd6fa9fa44b8"
+  },
+  "packaging": "Tripo geometry preserved; new models use color maps up to 1536px, relief up to 768px and ORM up to 512px."
+}

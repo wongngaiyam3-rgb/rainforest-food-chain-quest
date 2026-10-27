@@ -3,7 +3,7 @@ import * as T from './vendor/three.module.v3.js';
 // Separate species albedo and fine-scale relief. Dark coat markings are pigment,
 // never deep bumps; whites are kept independent from the dorsal coat.
 export const MATERIAL_VERSION='Wildlife V4';
-export const SKIN_IDS=['grasshopper','iguana','sloth','frog','owl','harpy','agouti','paca','tapir','peccary','coati','toucan','boa','ocelot','jaguar','belly-fur','breast-feathers','yellow-feathers'];
+export const SKIN_IDS=["grasshopper", "iguana", "frog", "harpy", "agouti", "tapir", "peccary", "coati", "toucan", "boa", "jaguar", "belly-fur", "breast-feathers", "yellow-feathers"];
 const loaded=new Map(),materials=new Map();
 const bird=new Set(['owl','harpy','toucan','breast-feathers','yellow-feathers']);
 const config={frog:[.46,.002],iguana:[.77,.006],boa:[.69,.004],grasshopper:[.65,.003],tapir:[.89,.002],sloth:[.96,.008]};
