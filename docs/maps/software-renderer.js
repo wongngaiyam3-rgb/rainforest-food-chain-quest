@@ -19,7 +19,7 @@ export class SoftwareRenderer{
  render(scene,camera){
   const ctx=this.ctx,w=this.w,h=this.h;scene.updateMatrixWorld();camera.updateMatrixWorld();const vp=new T.Matrix4().multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);const v=new T.Vector3(),p=new T.Vector3(),sc=new T.Vector3(),quat=new T.Quaternion();
   const project=(x,y,z,m)=>{v.set(x,y,z).applyMatrix4(m);const world=v.clone();const view=world.clone().applyMatrix4(camera.matrixWorldInverse);p.copy(v).applyMatrix4(vp);return {x:(p.x*.5+.5)*w,y:(.5-p.y*.5)*h,z:p.z,depth:-view.z,view,world};};
-  const bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#5ab2c3');bg.addColorStop(.45,'#84c8c6');bg.addColorStop(1,'#d2d9bd');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  const bg=ctx.createLinearGradient(0,0,0,h);const palette=scene.userData.palette||['#5ab2c3','#84c8c6','#d2d9bd'];bg.addColorStop(0,palette[0]);bg.addColorStop(.45,palette[1]);bg.addColorStop(1,palette[2]);ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
   const frustum=new T.Frustum().setFromProjectionMatrix(vp);
   const draw=[];const maxDist=scene.fog?65:100;
   scene.traverse(o=>{if(!o.isMesh||o.isInstancedMesh||!o.visible||!o.geometry||!o.material)return;for(let parent=o.parent;parent;parent=parent.parent)if(!parent.visible)return;const g=o.geometry,m=Array.isArray(o.material)?o.material[0]:o.material;if(m.opacity===0)return;if(o.userData.tripoModel&&!frustum.intersectsObject(o))return;
