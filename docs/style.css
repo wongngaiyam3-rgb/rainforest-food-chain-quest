@@ -2,3 +2,10 @@
 
 /* Higgsfield natural-history artwork */
 .species-card img{border-radius:12px;background:#f6f3e9}.portrait-wrap{background:#f6f3e9}.portrait-wrap img{object-fit:cover}.species-detail img{background:#f6f3e9}.tray-card img,.chain-slot img{border-radius:8px}.journal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:700px){.journal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Movement feedback stays clear of the observation card and touch joystick. */
+.move-help{line-height:1.9;bottom:28px;max-width:260px}
+.travel-status{position:absolute;right:28px;bottom:84px;max-width:240px;border-radius:12px;padding:9px 12px;color:#fff8df;background:#244638e8;border:1px solid #e8bc5a80;font-size:11px;pointer-events:none}
+#stopBtn{color:#ffdc73}#joystick{user-select:none;-webkit-user-select:none}
+@media(any-pointer:coarse){#joystick{display:flex}#touchLookHint{display:block}.move-help{display:none}}
+@media(max-width:700px){.travel-status{right:14px;bottom:158px;max-width:195px;font-size:10px}.camera-tools{gap:4px}.camera-tools button{min-width:38px}}

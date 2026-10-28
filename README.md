@@ -9,3 +9,7 @@
 GitHub Pages：main 分支 /docs。動物觀察室：materials.html。驗證：node --test tests/*.test.mjs。
 
 模型幾何保留 Tripo 生成結果，網頁版本壓縮內嵌材質尺寸以控制載入量；來源見 docs/assets/models/generation-status.json。Three.js MIT 授權見 docs/vendor/THREE-LICENSE.txt。完整 WebGL 光影及 iPad 效能待實機驗證。
+
+操作更新：WASD／方向鍵按畫面方向移動，放開即停；觸控搖桿設有中央防誤觸區。輕點可行走地面會顯示金色目的地，按空白鍵、Esc 或「停止」取消；方向鍵或搖桿立即接手。拖曳視角、右鍵與雙指操作不會觸發點地面前往。遇到障礙會停止並提示，並非自動尋路。
+
+移動按經過時間計算（單幀最多 0.25 秒），碰撞以短步距檢查；近看模型後移動會恢復原本探索視角。操作回歸測試包含 60／20／4 FPS 位移一致、樹幹及河流碰撞、橋樑可通行、停止與失焦、搖桿及拖曳誤判。

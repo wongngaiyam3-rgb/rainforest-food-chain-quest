@@ -1,7 +1,7 @@
 /* Original procedural character and botanical models, made for Rainforest Expedition. */
-import {attachTripoAnimal} from './tripo-model.js?v=tripo-all-v6';
+import {attachTripoAnimal} from './tripo-model.js?v=controls-v1';
 import * as THREE from './vendor/three.module.v3.js';
-import {finishAnimalMaterials} from './animal-materials.js?v=tripo-all-v6';
+import {finishAnimalMaterials} from './animal-materials.js?v=controls-v1';
 const mats=new Map(), geos=new Map();
 function mat(c,roughness=.8){const k=c+':'+roughness;if(!mats.has(k))mats.set(k,new THREE.MeshStandardMaterial({color:c,roughness}));return mats.get(k);}
 function sphere(){if(!geos.has('s'))geos.set('s',new THREE.SphereGeometry(1,16,12));return geos.get('s');}

@@ -1,8 +1,9 @@
+import {WALK_SPEED, screenToWorld, movePlayer, isWalkable, targetStep} from './movement.js?v=controls-v1';
 import * as T from './vendor/three.module.v3.js';
-import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=tripo-all-v6';
-import {animalSpecies} from './data.js?v=tripo-all-v6';
-import {loadAnimalTextures} from './animal-materials.js?v=tripo-all-v6';
-import {SoftwareRenderer} from './software-renderer.js?v=tripo-all-v6';
+import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=controls-v1';
+import {animalSpecies} from './data.js?v=controls-v1';
+import {loadAnimalTextures} from './animal-materials.js?v=controls-v1';
+import {SoftwareRenderer} from './software-renderer.js?v=controls-v1';
 
 export function createWorld(container,quality='high'){
  let renderer;try{renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});}catch{renderer=new SoftwareRenderer();}
@@ -59,15 +60,33 @@ export function createWorld(container,quality='high'){
  const explorer=createExplorer();explorer.position.set(0,0,24);scene.add(explorer);const player=explorer.position;let focused=null;let theta=0,pitch=.52,distance=9.3,walk=0;const target=new T.Vector3();const desired=new T.Vector3();
  const ring=mesh(new T.RingGeometry(.65,.72,32),new T.MeshBasicMaterial({color:'#fcf2b2',transparent:true,opacity:.65,side:T.DoubleSide,depthWrite:false}),0,.045,24);ring.rotation.x=-Math.PI/2;ring.castShadow=false;
  const cameraRay=new T.Raycaster();
+ const destination=mesh(new T.RingGeometry(.28,.42,24),new T.MeshBasicMaterial({color:'#ffdc73',side:T.DoubleSide,depthWrite:false}),0,.06,0);destination.rotation.x=-Math.PI/2;destination.visible=false;destination.castShadow=false;
+ let moveTarget=null,blockedTime=0,inspectionView=null;
+ const direction=new T.Vector3();
+ function cancelMove(){moveTarget=null;blockedTime=0;destination.visible=false;}
+ function leaveInspection(){if(!focused)return;focused=null;if(inspectionView){({theta,pitch,distance}=inspectionView);inspectionView=null;}}
+ function setDestination(point){cancelMove();if(!point||!isWalkable(point.x,point.z,solids))return false;leaveInspection();moveTarget={x:point.x,z:point.z};destination.position.set(point.x,.06,point.z);destination.visible=true;return true;}
+ function focusAnimal(a){cancelMove();if(!a){leaveInspection();return;}if(!focused)inspectionView={theta,pitch,distance};focused=a;distance=Math.max(1.7,new T.Box3().setFromObject(a.model).getSize(new T.Vector3()).length()*1.25/Math.min(1,camera.aspect));pitch=.25;}
+
  const glow=mesh(new T.RingGeometry(1.0,1.07,40),new T.MeshBasicMaterial({color:'#f9dc85',transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}),0,.055,0);glow.rotation.x=-Math.PI/2;glow.castShadow=false;
  const fireflyGeo=new T.BufferGeometry();const firePos=[];for(let i=0;i<65;i++)firePos.push((rnd()-.5)*65,1+rnd()*7,(rnd()-.5)*65);fireflyGeo.setAttribute('position',new T.Float32BufferAttribute(firePos,3));const motes=new T.Points(fireflyGeo,new T.PointsMaterial({color:'#ffefb6',size:.075,transparent:true,opacity:.65}));scene.add(motes);
  function update(dt,t,input,paused){
+  let movementEvent=null;
   if(!paused){
-   const dx=(Math.cos(theta)*input.x-Math.sin(theta)*input.y),dz=(-Math.sin(theta)*input.x-Math.cos(theta)*input.y);const amount=Math.min(1,Math.hypot(dx,dz));walk+=dt*amount;
-   const nextX=player.x+dx*dt*3.8,nextZ=player.z+dz*dt*3.8;
-   function valid(x,z){if(Math.abs(x)>32||Math.abs(z)>33)return false;const riverX=23+Math.sin(z*.11)*2;if(Math.abs(x-riverX)<1.8&&Math.abs(z-4)>1.6)return false;return !solids.some(s=>Math.hypot(x-s.x,z-s.z)<s.r+.35);}
-   if(valid(nextX,player.z))player.x=nextX;if(valid(player.x,nextZ))player.z=nextZ;
-   if(amount>.05){focused=null;const desiredAngle=Math.atan2(dx,dz);let diff=desiredAngle-explorer.rotation.y;diff=Math.atan2(Math.sin(diff),Math.cos(diff));explorer.rotation.y+=diff*Math.min(1,dt*12);}
+   camera.getWorldDirection(direction);
+   const angle=Math.atan2(-direction.x,-direction.z);
+   const manual=screenToWorld(input,angle);
+   if(Math.hypot(manual.x,manual.z)>.001){cancelMove();leaveInspection();}
+   const step=moveTarget?targetStep(player,moveTarget,dt):{x:manual.x*WALK_SPEED*dt,z:manual.z*WALK_SPEED*dt};
+   const requested=Math.hypot(step.x,step.z),before=moveTarget?Math.hypot(player.x-moveTarget.x,player.z-moveTarget.z):0;
+   const moved=movePlayer(player,step,(x,z)=>isWalkable(x,z,solids));
+   if(moveTarget){
+    const remaining=Math.hypot(player.x-moveTarget.x,player.z-moveTarget.z);
+    if(step.arrived||remaining<=.15){cancelMove();movementEvent='arrived';}
+    else {blockedTime=before-remaining<Math.min(.01,requested*.1)?blockedTime+dt:0;if(blockedTime>.6){cancelMove();movementEvent='blocked';}}
+   }
+   const amount=dt>0?Math.min(1,moved/(WALK_SPEED*dt)):0;walk+=moved/WALK_SPEED;
+   if(moved>.0001){const desiredAngle=Math.atan2(step.x,step.z);let diff=desiredAngle-explorer.rotation.y;diff=Math.atan2(Math.sin(diff),Math.cos(diff));explorer.rotation.y+=diff*(1-Math.exp(-dt*14));}
    animateModel(explorer,walk,amount);ring.position.set(player.x,.045,player.z);ring.material.opacity=.35+Math.sin(t*3)*.07;
    for(const p of plants)animateModel(p.model,t,0);
    for(const a of animals){const p=a.home,g=a.model,phase=t+a.phase;let moving=0;
@@ -81,6 +100,7 @@ export function createWorld(container,quality='high'){
    motes.rotation.y=t*.006;
   }
   target.copy(focused?focused.point:player);if(!focused)target.y+=1.1;desired.set(target.x+Math.sin(theta)*Math.cos(pitch)*distance,target.y+Math.sin(pitch)*distance,target.z+Math.cos(theta)*Math.cos(pitch)*distance);const camDirection=desired.clone().sub(target);cameraRay.set(target,camDirection.clone().normalize());cameraRay.far=camDirection.length();const hits=cameraRay.intersectObjects(solids.map(s=>s.mesh),false);if(hits.length&&hits[0].distance>2.4)desired.copy(target).add(camDirection.normalize().multiplyScalar(Math.max(2.4,hits[0].distance-.5)));camera.position.lerp(desired,1-Math.exp(-dt*9));camera.lookAt(target);
+  return movementEvent;
  }
  function initialCamera(){camera.position.set(player.x+Math.sin(theta)*8,6,player.z+Math.cos(theta)*8);camera.lookAt(player.x,1,player.z);}initialCamera();
  const ray=new T.Raycaster();function visible(targetPoint){const origin=player.clone().add(new T.Vector3(0,1.1,0));const delta=targetPoint.clone().sub(origin);ray.set(origin,delta.clone().normalize());ray.far=delta.length()-.1;return !ray.intersectObjects(solids.map(s=>s.mesh),false).length;}
@@ -90,6 +110,5 @@ export function createWorld(container,quality='high'){
  function zone(){const x=player.x,z=player.z;return z>18?'探索營地':x<-10&&z<-3?'榕樹林':z<-18?'林冠觀察地':x>7&&z<-7?'溪流觀察台':x>7?'溪流葉叢':'闊葉林小徑';}
  function resize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
  function pickGround(x,y){camera.updateMatrixWorld();cameraRay.setFromCamera(new T.Vector2(x/innerWidth*2-1,1-y/innerHeight*2),camera);const out=new T.Vector3();return cameraRay.ray.intersectPlane(new T.Plane(new T.Vector3(0,1,0),0),out)?out:null;}
- function inputToward(x,z){const dx=x-player.x,dz=z-player.z;const len=Math.hypot(dx,dz)||1;return {x:(Math.cos(theta)*dx-Math.sin(theta)*dz)/len,y:(-Math.sin(theta)*dx-Math.cos(theta)*dz)/len};}
- return {textures,focusAnimal:a=>{focused=a;distance=a?Math.max(1.7,new T.Box3().setFromObject(a.model).getSize(new T.Vector3()).length()*1.25/Math.min(1,camera.aspect)):9.3;pitch=.25;},scene,camera,renderer,player,animals,plants,portraits,observe,highlight,update,zone,resize,pickGround,inputToward,render:()=>renderer.render(scene,camera),rotate:(dx,dy)=>{theta-=dx*.006;pitch=T.MathUtils.clamp(pitch+dy*.004,.22,.94);},zoom:d=>distance=T.MathUtils.clamp(distance+d,focused?1.35:5,15),center:()=>{theta=0;pitch=.52;distance=9.3;},home:()=>{focused=null;player.set(0,0,24);initialCamera();},setQuality:q=>{renderer.setPixelRatio(Math.min(devicePixelRatio,q==='low'?1:1.5));renderer.shadowMap.enabled=q!=='low';resize();}};
+ return {textures,focusAnimal,leaveInspection,setDestination,cancelMove,scene,camera,renderer,player,animals,plants,portraits,observe,highlight,update,zone,resize,pickGround,render:()=>renderer.render(scene,camera),rotate:(dx,dy)=>{theta-=dx*.006;pitch=T.MathUtils.clamp(pitch+dy*.004,.22,.94);},zoom:d=>distance=T.MathUtils.clamp(distance+d,focused?1.35:5,15),center:()=>{leaveInspection();theta=0;pitch=.52;distance=9.3;},home:()=>{cancelMove();leaveInspection();theta=0;pitch=.52;distance=9.3;player.set(0,0,24);initialCamera();},setQuality:q=>{renderer.setPixelRatio(Math.min(devicePixelRatio,q==='low'?1:1.5));renderer.shadowMap.enabled=q!=='low';resize();}};
 }
