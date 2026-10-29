@@ -16,7 +16,7 @@ export const biomes={
     "rabbitfish"
    ],
    "challengeText": "兔子魚吃泰來草。",
-   "note": "這是熱帶淺海海草床及鄰近礁區的簡化教學模型，不代表某一地點的完整物種名單。卵葉喜鹽草（Halophila ovalis）及泰來草（Thalassia hemprichii）都是真正的開花植物。藻類、浮游生物和分解者未製作成觀察卡；珊瑚與海葵屬於動物。兔子魚及部分食物關係按類群概括。"
+   "note": "這是熱帶淺海海草床及鄰近礁區的簡化教學模型，不代表某一地點的完整物種名單。卵葉喜鹽草及泰來草是開花植物；浮游植物是能行光合作用的微小生產者，圖中已放大示意，並非海底大型海草。海草蝦按類群概括，連到浮游植物的箭頭以幼體取食微藻作教學例子，並不代表所有蝦及所有生長階段的食性。浮游動物、其他藻類及分解者尚未製作成觀察卡；珊瑚與海葵屬於動物。"
   },
   "species": [
    {
@@ -135,8 +135,8 @@ export const biomes={
     "id": "shrimp",
     "name": "海草蝦",
     "tag": "葉叢裡的小清道夫",
-    "diet": "我會吃藻類、碎屑和微小生物，也可能成為魚類和頭足類的食物。",
-    "food": "藻類 · 碎屑 · 微小生物",
+    "diet": "我會吃藻類、碎屑和微小生物。蝦的食物會隨種類和生長階段改變；幼體可吃水中的微藻。本圖用「浮游植物 → 海草蝦」表示這段食物關係。魚類和頭足類也會吃蝦。",
+    "food": "浮游植物（微藻）· 碎屑 · 微小生物",
     "hint": "在小地圖尋找 09 號觀察點，走近海草蝦。",
     "kind": "consumer",
     "top": false,
@@ -256,9 +256,28 @@ export const biomes={
     "x": 0,
     "z": -28,
     "size": 4.4
+   },
+   {
+    "id": "phytoplankton",
+    "name": "浮游植物",
+    "tag": "海水中的微小生產者 · 放大示意",
+    "diet": "我是海水中的微小藻類，能利用陽光製造養分，是生產者。我可供部分蝦類取食。本模型已放大，方便觀察；真正的浮游植物通常需要顯微鏡才看得清楚。",
+    "food": "陽光 · 水 · 二氧化碳 · 礦物養分",
+    "hint": "在小地圖尋找 18 號觀察點，走近漂浮的浮游植物。",
+    "kind": "producer",
+    "top": false,
+    "color": "#86b85b",
+    "x": 0,
+    "z": 8,
+    "size": 2.5,
+    "floating": true
    }
   ],
   "edges": [
+   [
+    "phytoplankton",
+    "shrimp"
+   ],
    [
     "seagrass",
     "turtle"
@@ -360,6 +379,14 @@ export const biomes={
    [
     "黑鰭礁鯊 · Seattle Aquarium",
     "https://www.seattleaquarium.org/animal/blacktip-reef-shark/"
+   ],
+   [
+    "浮游植物 · NOAA",
+    "https://oceanservice.noaa.gov/facts/phyto.html"
+   ],
+   [
+    "海草蝦與幼體食性 · SCDNR",
+    "https://www.dnr.sc.gov/marine/mrri/acechar/speciesgallery/Invertebrates/GrassShrimp/index.html"
    ]
   ]
  },

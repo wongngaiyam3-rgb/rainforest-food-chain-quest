@@ -1,4 +1,4 @@
-import {biomes} from "./biomes.js?v=savanna-hyena-v1";
+import {biomes} from "./biomes.js?v=ocean-plankton-v2";
 export const mapId=typeof location!=="undefined"&&Object.hasOwn(biomes,new URLSearchParams(location.search).get("map"))?new URLSearchParams(location.search).get("map"):"ocean";
 export const {biome,species,edges,sources}=biomes[mapId];
 export const byId=Object.fromEntries(species.map(s=>[s.id,s]));

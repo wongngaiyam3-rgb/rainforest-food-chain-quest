@@ -897,5 +897,20 @@
     "skins": 0,
     "animations": 0,
     "file": "docs/maps/assets/savanna/hyena.glb"
+  },
+  {
+    "map": "ocean",
+    "id": "phytoplankton",
+    "name": "浮游植物",
+    "index": 17,
+    "method": "Authored procedural magnified microalgae diagram; not AI-generated; not to scale",
+    "generator": "tools/make-phytoplankton.py",
+    "bytes": 86432,
+    "triangles": 3072,
+    "materials": 1,
+    "images": 1,
+    "skins": 0,
+    "animations": 0,
+    "file": "docs/maps/assets/ocean/phytoplankton.glb"
   }
 ]
