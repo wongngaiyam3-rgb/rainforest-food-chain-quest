@@ -864,18 +864,18 @@ export const biomes={
     "top": false
    },
    {
-    "id": "elephant",
-    "name": "非洲象",
-    "tag": "靈活長鼻的草食者",
-    "food": "草 · 葉片 · 樹皮 · 果實",
-    "diet": "我吃草、葉片、樹皮及果實。不同季節會選擇不同植物。",
-    "size": 4.6,
+    "id": "hyena",
+    "name": "斑鬣狗",
+    "tag": "會捕獵的草原食肉者",
+    "food": "斑馬 · 角馬 · 瞪羚 · 腐肉",
+    "diet": "我會主動捕獵，也會取食腐肉。斑鬣狗可合作捕食斑馬、角馬和瞪羚等動物，獵物大小會受到同伴數量影響。",
+    "size": 3,
     "x": 15,
     "z": 9,
     "kind": "consumer",
-    "hint": "在小地圖尋找 07 號觀察點，走近非洲象。",
-    "color": "#9b8348",
-    "top": false
+    "top": true,
+    "color": "#aa8550",
+    "hint": "在小地圖尋找 07 號觀察點，走近斑鬣狗。"
    },
    {
     "id": "buffalo",
@@ -892,20 +892,6 @@ export const biomes={
     "top": false
    },
    {
-    "id": "rhino",
-    "name": "白犀牛",
-    "tag": "低頭吃草的大住客",
-    "food": "草",
-    "diet": "我主要吃草，寬闊的嘴適合貼近地面取食。",
-    "size": 4,
-    "x": 4,
-    "z": 1,
-    "kind": "consumer",
-    "hint": "在小地圖尋找 09 號觀察點，走近白犀牛。",
-    "color": "#9b8348",
-    "top": false
-   },
-   {
     "id": "grasshopper",
     "name": "蚱蜢",
     "tag": "葉叢間的小跳躍家",
@@ -915,7 +901,7 @@ export const biomes={
     "x": 15,
     "z": -1,
     "kind": "consumer",
-    "hint": "在小地圖尋找 10 號觀察點，走近蚱蜢。",
+    "hint": "在小地圖尋找 09 號觀察點，走近蚱蜢。",
     "color": "#9b8348",
     "top": false
    },
@@ -929,7 +915,7 @@ export const biomes={
     "x": -8,
     "z": -3,
     "kind": "consumer",
-    "hint": "在小地圖尋找 11 號觀察點，走近草原野兔。",
+    "hint": "在小地圖尋找 10 號觀察點，走近草原野兔。",
     "color": "#9b8348",
     "top": false
    },
@@ -943,7 +929,7 @@ export const biomes={
     "x": 10,
     "z": -8,
     "kind": "consumer",
-    "hint": "在小地圖尋找 12 號觀察點，走近鴕鳥。",
+    "hint": "在小地圖尋找 11 號觀察點，走近鴕鳥。",
     "color": "#9b8348",
     "top": false
    },
@@ -957,7 +943,7 @@ export const biomes={
     "x": -16,
     "z": -10,
     "kind": "consumer",
-    "hint": "在小地圖尋找 13 號觀察點，走近彩虹飛蜥。",
+    "hint": "在小地圖尋找 12 號觀察點，走近彩虹飛蜥。",
     "color": "#9b8348",
     "top": false
    },
@@ -971,7 +957,7 @@ export const biomes={
     "x": 1,
     "z": -12,
     "kind": "consumer",
-    "hint": "在小地圖尋找 14 號觀察點，走近獴。",
+    "hint": "在小地圖尋找 13 號觀察點，走近獴。",
     "color": "#9b8348",
     "top": true
    },
@@ -985,7 +971,7 @@ export const biomes={
     "x": -11,
     "z": -20,
     "kind": "consumer",
-    "hint": "在小地圖尋找 15 號觀察點，走近蛇鷲。",
+    "hint": "在小地圖尋找 14 號觀察點，走近蛇鷲。",
     "color": "#9b8348",
     "top": true
    },
@@ -999,7 +985,7 @@ export const biomes={
     "x": 9,
     "z": -20,
     "kind": "consumer",
-    "hint": "在小地圖尋找 16 號觀察點，走近獵豹。",
+    "hint": "在小地圖尋找 15 號觀察點，走近獵豹。",
     "color": "#9b8348",
     "top": true
    },
@@ -1013,7 +999,7 @@ export const biomes={
     "x": 0,
     "z": -28,
     "kind": "consumer",
-    "hint": "在小地圖尋找 17 號觀察點，走近獅子。",
+    "hint": "在小地圖尋找 16 號觀察點，走近獅子。",
     "color": "#9b8348",
     "top": true
    }
@@ -1033,15 +1019,7 @@ export const biomes={
    ],
    [
     "redgrass",
-    "elephant"
-   ],
-   [
-    "redgrass",
     "buffalo"
-   ],
-   [
-    "redgrass",
-    "rhino"
    ],
    [
     "redgrass",
@@ -1058,10 +1036,6 @@ export const biomes={
    [
     "acacia",
     "giraffe"
-   ],
-   [
-    "acacia",
-    "elephant"
    ],
    [
     "acacia",
@@ -1122,6 +1096,18 @@ export const biomes={
    [
     "giraffe",
     "lion"
+   ],
+   [
+    "zebra",
+    "hyena"
+   ],
+   [
+    "wildebeest",
+    "hyena"
+   ],
+   [
+    "gazelle",
+    "hyena"
    ]
   ],
   "sources": [
@@ -1140,6 +1126,10 @@ export const biomes={
    [
     "蛇鷲食性 · San Diego Zoo",
     "https://animals.sandiegozoo.org/animals/secretary-bird"
+   ],
+   [
+    "斑鬣狗食性 · San Diego Zoo",
+    "https://animals.sandiegozoo.org/animals/spotted-hyena"
    ]
   ]
  }

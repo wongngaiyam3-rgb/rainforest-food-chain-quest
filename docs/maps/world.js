@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.v3.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {species,biome,mapId} from './data.js?v=three-biomes-2';
+import {species,biome,mapId} from './data.js?v=savanna-hyena-v1';
 import {SoftwareRenderer} from './software-renderer.js';
 export function createWorld(container,quality='high'){
  let renderer;try{renderer=new T.WebGLRenderer({antialias:true});}catch{renderer=new SoftwareRenderer();}
@@ -36,7 +36,7 @@ export function createWorld(container,quality='high'){
  model.traverse(o=>{if(!o.isMesh)return;o.castShadow=o.receiveShadow=true;o.userData.tripoModel=true;for(const m of(Array.isArray(o.material)?o.material:[o.material])){m.userData.skinKey=s.id;m.roughness=Math.max(.65,m.roughness||0);}});
  model.updateMatrixWorld(true);let box=new T.Box3().setFromObject(model),size=box.getSize(new T.Vector3());if(s.kind==='consumer'&&size.x>size.z*1.2)model.rotation.y=-Math.PI/2;model.updateMatrixWorld(true);box=new T.Box3().setFromObject(model);size=box.getSize(new T.Vector3());const center=box.getCenter(new T.Vector3()),scale=s.size/Math.max(size.x,size.y,size.z);model.scale.setScalar(scale);model.position.set(-center.x*scale,-box.min.y*scale,-center.z*scale);
  const root=new T.Group();root.add(model);const bottom=['urchin','shrimp','crab','octopus'].includes(s.id)||s.kind==='producer';const y=mapId==='ocean'&&!bottom?1.1:0;root.position.set(s.x,y,s.z);scene.add(root);const a={id:s.id,model:root,home:new T.Vector3(s.x,y,s.z),point:new T.Vector3(s.x,y+.4,s.z),radius:3.6,index:species.indexOf(s),bottom};(s.kind==='producer'?plants:animals).push(a);
- count++;document.querySelector('#loading small').textContent=`已準備 ${count} / 17 種${biome.name}生物`;return a;
+ count++;document.querySelector('#loading small').textContent=`已準備 ${count} / ${species.length} 種${biome.name}生物`;return a;
  }
  // Three concurrent loads keep memory and network use bounded on tablets.
  const queue=[...species];const ready=Promise.all(Array.from({length:3},async()=>{while(queue.length)await load(queue.shift());}));

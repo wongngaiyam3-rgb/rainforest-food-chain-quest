@@ -721,24 +721,6 @@
   },
   {
     "map": "savanna",
-    "id": "elephant",
-    "name": "非洲象",
-    "index": 6,
-    "job_id": "49c821b7-4626-460a-a342-793f5e603a74",
-    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JEZj9VFAXM5ksXRLGB7j99068h/hf_20261027_161323_49c821b7-4626-460a-a342-793f5e603a74.glb",
-    "image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JEZj9VFAXM5ksXRLGB7j99068h/hf_20261027_160738_ff32e99a-ed3e-4ef1-8afd-e58c8fe2335f.png",
-    "image_job_id": "ff32e99a-ed3e-4ef1-8afd-e58c8fe2335f",
-    "bytes": 995456,
-    "original_bytes": 13706772,
-    "triangles": 15775,
-    "materials": 1,
-    "images": 3,
-    "skins": 0,
-    "animations": 0,
-    "file": "docs/maps/assets/savanna/elephant.glb"
-  },
-  {
-    "map": "savanna",
     "id": "buffalo",
     "name": "非洲水牛",
     "index": 7,
@@ -754,24 +736,6 @@
     "skins": 0,
     "animations": 0,
     "file": "docs/maps/assets/savanna/buffalo.glb"
-  },
-  {
-    "map": "savanna",
-    "id": "rhino",
-    "name": "白犀牛",
-    "index": 8,
-    "job_id": "5e50ae02-40f2-4905-8948-93807baecc7f",
-    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JEZj9VFAXM5ksXRLGB7j99068h/hf_20261027_161334_5e50ae02-40f2-4905-8948-93807baecc7f.glb",
-    "image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JEZj9VFAXM5ksXRLGB7j99068h/hf_20261027_160737_b31dc301-4b94-4e56-a1b3-8762ee2346be.png",
-    "image_job_id": "b31dc301-4b94-4e56-a1b3-8762ee2346be",
-    "bytes": 1029316,
-    "original_bytes": 14098004,
-    "triangles": 15356,
-    "materials": 1,
-    "images": 3,
-    "skins": 0,
-    "animations": 0,
-    "file": "docs/maps/assets/savanna/rhino.glb"
   },
   {
     "map": "savanna",
@@ -916,5 +880,22 @@
     "skins": 0,
     "animations": 0,
     "file": "docs/maps/assets/savanna/lion.glb"
+  },
+  {
+    "map": "savanna",
+    "id": "hyena",
+    "name": "斑鬣狗",
+    "job_id": "5402b807-5bfc-41a0-89ff-93815f6e2044",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JEZj9VFAXM5ksXRLGB7j99068h/hf_20261029_103823_5402b807-5bfc-41a0-89ff-93815f6e2044.glb",
+    "image_job_id": "1bd43dfa-efcf-4162-a35c-74b8f5be6d10",
+    "image_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JEZj9VFAXM5ksXRLGB7j99068h/hf_20261029_103732_1bd43dfa-efcf-4162-a35c-74b8f5be6d10.png",
+    "bytes": 1901344,
+    "original_bytes": 15804508,
+    "triangles": 15552,
+    "materials": 1,
+    "images": 3,
+    "skins": 0,
+    "animations": 0,
+    "file": "docs/maps/assets/savanna/hyena.glb"
   }
 ]
