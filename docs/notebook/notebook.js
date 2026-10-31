@@ -1,4 +1,4 @@
-import {ensureStudent,addStrip,catalog,biomeURL,picture,escapeHTML as esc,notebook,localSave} from '../shared/passport.js?v=plant-polish-v1';
+import {ensureStudent,addStrip,catalog,biomeURL,picture,escapeHTML as esc,notebook,localSave} from '../shared/passport.js?v=plant-polish-v2';
 const student=await ensureStudent();addStrip();document.querySelector('#studentName').textContent=`${student.year} 學年 · ${student.class_name} · ${student.student_no} 號`;
 let selected='all',type='animals',data=await notebook();
 const nav=document.querySelector('#biomeNav');nav.innerHTML='<button data-biome="all" class="active">四域總覽</button>'+Object.entries(catalog).map(([id,b])=>`<button data-biome="${id}">${b.name}</button>`).join('');

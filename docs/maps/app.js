@@ -1,4 +1,4 @@
-import {ensureStudent,addStrip,localSave,saveProgress,offerImport} from '../shared/passport.js?v=plant-polish-v1';
+import {ensureStudent,addStrip,localSave,saveProgress,offerImport} from '../shared/passport.js?v=plant-polish-v2';
 await ensureStudent();
 import {createWorld} from './world.js?v=ocean-plankton-v2';
 import {species,animalSpecies,byId,checkChain,cleanSave,STORAGE,sources,biome,mapId} from './data.js?v=ocean-plankton-v2';

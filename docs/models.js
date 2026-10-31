@@ -1,4 +1,4 @@
-import {finishPlantMaterials} from './plant-materials.js?v=plant-polish-v1';
+import {finishPlantMaterials} from './plant-materials.js?v=plant-polish-v2';
 /* Original procedural character and botanical models, made for Rainforest Expedition. */
 import {attachTripoAnimal} from './tripo-model.js?v=controls-v1';
 import * as THREE from './vendor/three.module.v3.js';

@@ -1,8 +1,8 @@
-import {ensureStudent,addStrip,localSave,saveProgress,offerImport} from './shared/passport.js?v=plant-polish-v1';
+import {ensureStudent,addStrip,localSave,saveProgress,offerImport} from './shared/passport.js?v=plant-polish-v2';
 await ensureStudent();
 import {createControls} from './controls.js?v=controls-v1';
 import {frameSeconds} from './movement.js?v=controls-v1';
-import {createWorld} from './world.js?v=plant-polish-v1';
+import {createWorld} from './world.js?v=plant-polish-v2';
 import {species,animalSpecies,byId,checkChain,cleanSave,STORAGE,sources} from './data.js?v=controls-v1';
 
 const $=s=>document.querySelector(s);let save=cleanSave(null),storageOK=true;
