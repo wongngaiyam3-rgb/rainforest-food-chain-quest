@@ -1,6 +1,6 @@
 import {WALK_SPEED, screenToWorld, movePlayer, isWalkable, targetStep} from './movement.js?v=controls-v1';
 import * as T from './vendor/three.module.v3.js';
-import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=controls-v1';
+import {createAnimal,createExplorer,createPlant,animateModel} from './models.js?v=plant-polish-v1';
 import {animalSpecies} from './data.js?v=controls-v1';
 import {loadAnimalTextures} from './animal-materials.js?v=controls-v1';
 import {SoftwareRenderer} from './software-renderer.js?v=controls-v1';

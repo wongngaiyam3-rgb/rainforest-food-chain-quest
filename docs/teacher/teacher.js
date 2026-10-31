@@ -1,4 +1,4 @@
-import {api,catalog,picture,escapeHTML as esc} from '../shared/passport.js?v=passport-v1';
+import {api,catalog,picture,escapeHTML as esc} from '../shared/passport.js?v=plant-polish-v1';
 const $=s=>document.querySelector(s);const TOKEN='fcq-teacher-token';let token=sessionStorage.getItem(TOKEN)||'',data=null,loading=false;
 $('#number').innerHTML+=Array.from({length:25},(_,i)=>`<option>${i+1}</option>`).join('');$('#biome').innerHTML+=Object.entries(catalog).map(([id,b])=>`<option value="${id}">${b.name}</option>`).join('');
 $('#loginForm').onsubmit=async e=>{e.preventDefault();const button=e.target.querySelector('button');button.disabled=true;try{const r=await api('teacher-login',{password:$('#password').value});$('#password').value='';token=r.token;sessionStorage.setItem(TOKEN,token);await refresh();}catch(e){$('#loginError').textContent=e.message;}finally{button.disabled=false;}};
