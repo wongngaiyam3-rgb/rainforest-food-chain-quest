@@ -28,7 +28,7 @@ export function mountMagnifier(image){
  frame.addEventListener('pointerleave',()=>{if(activePointer===null)hide();});
  const release=e=>{activePointer=null;if(frame.hasPointerCapture(e.pointerId))frame.releasePointerCapture(e.pointerId);if(e.pointerType!=='mouse')hide();};
  frame.addEventListener('pointerup',release);frame.addEventListener('pointercancel',release);frame.addEventListener('lostpointercapture',()=>{activePointer=null;hide();});
- frame.addEventListener('keydown',e=>{const moves={ArrowLeft:[-.04,0],ArrowRight:[.04,0],ArrowUp:[0,-.04],ArrowDown:[0,.04]};if(e.key==='Escape'){hide();e.stopPropagation();return;}if(!enabled||!moves[e.key])return;e.preventDefault();x=Math.max(0,Math.min(1,x+moves[e.key][0]));y=Math.max(0,Math.min(1,y+moves[e.key][1]));draw();});
+ frame.addEventListener('keydown',e=>{const moves={ArrowLeft:[-.04,0],ArrowRight:[.04,0],ArrowUp:[0,-.04],ArrowDown:[0,.04]};if(e.key==='Escape'){if(!lens.hidden){e.preventDefault();e.stopPropagation();hide();}return;}if(!enabled||!moves[e.key])return;e.preventDefault();x=Math.max(0,Math.min(1,x+moves[e.key][0]));y=Math.max(0,Math.min(1,y+moves[e.key][1]));draw();});
  frame.addEventListener('focus',draw);frame.addEventListener('blur',hide);select.addEventListener('change',draw);
  toggle.onclick=()=>{enabled=!enabled;toggle.setAttribute('aria-pressed',String(enabled));toggle.textContent=enabled?'🔍 放大鏡：已開啟':'🔍 開啟放大鏡';frame.classList.toggle('magnifier-off',!enabled);if(enabled){frame.focus();draw();}else hide();};
  image.addEventListener('error',()=>{hide();toggle.disabled=true;tip.textContent='圖片暫時未能載入，請稍後重新開啟觀察卡。';});
