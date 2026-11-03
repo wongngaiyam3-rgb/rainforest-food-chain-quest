@@ -1,0 +1,139 @@
+{
+  "animals": [
+    {
+      "id": "grasshopper",
+      "name": "食葉蚱蜢",
+      "category": "insect",
+      "visible": "six",
+      "body": "食葉蚱蜢有三對腳、一對觸角，身體分為頭、胸、腹。",
+      "life": "卵孵化為若蟲，經蛻皮逐漸長大。"
+    },
+    {
+      "id": "iguana",
+      "name": "綠鬣蜥",
+      "category": "reptile",
+      "visible": "scales",
+      "body": "皮膚覆有乾燥鱗片，身體內有脊柱。",
+      "life": "綠鬣蜥會產卵；幼體外形與成體相似。"
+    },
+    {
+      "id": "frog",
+      "name": "食蟲樹蛙",
+      "category": "amphibian",
+      "visible": "smooth",
+      "body": "皮膚裸露、沒有鱗片，通常保持濕潤。",
+      "life": "樹蛙的生命週期通常包括卵、蝌蚪及成蛙；不同種類有差異。"
+    },
+    {
+      "id": "harpy",
+      "name": "角雕",
+      "category": "bird",
+      "visible": "feather",
+      "body": "身體有羽毛，有喙、兩隻腳和一對翅膀。",
+      "life": "角雕產卵，以肺呼吸，幼鳥由親鳥照顧。"
+    },
+    {
+      "id": "agouti",
+      "name": "刺豚鼠",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有毛髮，身體內有脊柱。",
+      "life": "雌性刺豚鼠以乳汁餵哺幼兒。"
+    },
+    {
+      "id": "tapir",
+      "name": "中美貘",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有短毛；幼貘的斑紋和成貘不同。",
+      "life": "雌性中美貘以乳汁餵哺幼兒。"
+    },
+    {
+      "id": "peccary",
+      "name": "領西貒",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有粗毛，頸部有淺色圈紋。",
+      "life": "雌性領西貒以乳汁餵哺幼兒。"
+    },
+    {
+      "id": "coati",
+      "name": "白鼻長鼻浣熊",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有毛髮，有長尾巴和四隻腳。",
+      "life": "雌性長鼻浣熊以乳汁餵哺幼兒。"
+    },
+    {
+      "id": "toucan",
+      "name": "彩虹巨嘴鳥",
+      "category": "bird",
+      "visible": "feather",
+      "body": "身體有羽毛，大嘴是喙，有兩隻腳。",
+      "life": "彩虹巨嘴鳥產卵，幼鳥由親鳥照顧。"
+    },
+    {
+      "id": "boa",
+      "name": "蚺蛇",
+      "category": "reptile",
+      "visible": "scales",
+      "body": "身體覆有鱗片，沒有腳；身體內仍有脊柱。",
+      "life": "蚺蛇直接產出幼蛇。因此，不能單用是否產卵判斷爬行類。"
+    },
+    {
+      "id": "jaguar",
+      "name": "美洲豹",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有毛髮，毛皮有玫瑰形斑紋。",
+      "life": "雌性美洲豹以乳汁餵哺幼兒。"
+    }
+  ],
+  "categories": {
+    "mammal": {
+      "name": "哺乳類",
+      "feature": "身體有毛髮；雌性以乳汁餵哺幼兒。",
+      "evidence": "milk"
+    },
+    "bird": {
+      "name": "鳥類",
+      "feature": "身體有羽毛；有喙，產卵。會不會飛並非判斷鳥類的唯一依據。",
+      "evidence": "feather"
+    },
+    "reptile": {
+      "name": "爬行類",
+      "feature": "皮膚有乾燥鱗片，以肺呼吸；有些產卵，有些直接產出幼體。",
+      "evidence": "scales"
+    },
+    "amphibian": {
+      "name": "兩棲類",
+      "feature": "皮膚通常裸露而濕潤；許多種類的成長經過變態。不是只看牠住在哪裡。",
+      "evidence": "cycle"
+    },
+    "insect": {
+      "name": "昆蟲類",
+      "feature": "沒有脊柱；成蟲身體分頭、胸、腹，胸部有三對腳。",
+      "evidence": "six"
+    }
+  },
+  "evidence": {
+    "milk": "以乳汁餵哺幼兒",
+    "feather": "身體有羽毛",
+    "scales": "皮膚有乾燥鱗片",
+    "cycle": "裸露濕潤皮膚及成長變態",
+    "six": "三對腳；頭、胸、腹"
+  },
+  "features": {
+    "fur": "毛髮",
+    "feather": "羽毛",
+    "scales": "鱗片",
+    "smooth": "裸露皮膚",
+    "six": "六隻腳",
+    "four": "四隻腳",
+    "two": "兩隻腳",
+    "zero": "沒有腳",
+    "wing": "翅膀",
+    "antenna": "觸角",
+    "unknown": "暫時看不清"
+  }
+}

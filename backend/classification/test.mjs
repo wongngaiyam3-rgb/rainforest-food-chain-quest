@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {emptyState,validate,score} from './rules.mjs';
+const c=JSON.parse(fs.readFileSync(new URL('./catalog.json',import.meta.url)));let tests=0;
+const check=(fn)=>{fn();tests++};
+check(()=>assert.equal(validate(c,emptyState()),0));
+check(()=>assert.throws(()=>validate(c,{...emptyState(),submitted:true})));
+const s=emptyState();s.groups[0].rule='有毛髮';s.groups[1].rule='沒有毛髮';for(const a of c.animals){s.observations[a.id]=[a.visible];s.placements[a.id]=a.category==='mammal'?'g1':'g2'}s.first={groups:structuredClone(s.groups),placements:{...s.placements}};
+check(()=>assert.equal(validate(c,s),0));
+for(const a of c.animals)s.final[a.id]={category:a.category,evidence:c.categories[a.category].evidence};s.reflection='我知道要比較多項特徵。';s.submitted=true;
+check(()=>assert.equal(validate(c,s),11));
+check(()=>{const n=structuredClone(s);n.final.boa.category='mammal';assert.equal(score(c,n),10)});
+check(()=>{const n=structuredClone(s);n.final.boa.evidence='milk';assert.equal(score(c,n),10)});
+check(()=>{const n=structuredClone(s);n.groups[0].rule='修改';n.first.groups=n.groups;assert.throws(()=>validate(c,n,s))});
+check(()=>{const n=structuredClone(s);delete n.observations.boa;assert.throws(()=>validate(c,n))});
+check(()=>{const n=structuredClone(s);n.final.boa.category='<script>';assert.throws(()=>validate(c,n))});
+check(()=>{const n=structuredClone(s);n.observations.boa=['fake'];assert.throws(()=>validate(c,n))});
+check(()=>{const n=structuredClone(s);n.first=null;assert.throws(()=>validate(c,n))});
+check(()=>{const n=structuredClone(s);n.final.boa.evidence='';assert.throws(()=>validate(c,n))});
+console.log(tests+' classification checks passed');
