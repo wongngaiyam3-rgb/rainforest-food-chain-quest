@@ -1,7 +1,7 @@
-import {ensureStudent,addStrip,currentStudent,escapeHTML as esc} from '../shared/passport.js?v=plant-polish-v2';
+import {ensureStudent,addStrip,currentStudent,escapeHTML as esc} from '../shared/passport.js?v=classification-entry-v1';
 import {emptyState,validate,score} from './rules.mjs';
 const c=await fetch('./catalog.json').then(r=>r.json()),$=s=>document.querySelector(s);
-await ensureStudent();addStrip();const student=currentStudent(),prefix='fcq-classification-v1:'+student.id;
+await ensureStudent({title:'準備好成為動物分類研究員嗎？',description:'選擇自己的班別和學號，觀察與分類紀錄會加入你的研究報告。',teacherURL:'classification/teacher.html'});addStrip();const student=currentStudent(),prefix='fcq-classification-v1:'+student.id;
 const token=()=>JSON.parse(sessionStorage.getItem('fcq-passport-v1:session')||'null')?.token||'';
 const identityValid=()=>JSON.parse(localStorage.getItem('fcq-passport-v1:identity')||'null')?.id===student.id;
 export async function request(action,data={}){const r=await fetch('https://nltqzuhubqhwtfxwuupr.supabase.co/functions/v1/foodchain-classification',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token()},body:JSON.stringify({action,...data}),signal:AbortSignal.timeout(15000)});const b=await r.json();if(!r.ok)throw Object.assign(Error(b.error||'未能連線'),{status:r.status});return b;}
