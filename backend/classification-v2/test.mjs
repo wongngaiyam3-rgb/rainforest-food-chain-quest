@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {emptyState,validate,correct,score,report} from './rules.mjs';
+const c=JSON.parse(fs.readFileSync(new URL('./catalog.json',import.meta.url)));const s=emptyState();let n=0;const t=fn=>{fn();n++};
+t(()=>assert.equal(validate(c,s),0));t(()=>assert.throws(()=>validate(c,{...s,version:1})));
+for(const a of c.animals)s.exam[a.id]={category:a.category,evidence:[c.categories[a.category].accepted[0]]};s.firstExam=structuredClone(s.exam);s.submitted=true;
+t(()=>assert.equal(validate(c,s),11));t(()=>assert.equal(report(c,s).reduce((n,r)=>n+r.firstCorrect,0),11));
+t(()=>assert(correct(c,'jaguar',{category:'mammal',evidence:['fur']})));t(()=>assert(correct(c,'jaguar',{category:'mammal',evidence:['milk']})));t(()=>assert(correct(c,'jaguar',{category:'mammal',evidence:['fur','milk']})));
+t(()=>assert(!correct(c,'jaguar',{category:'mammal',evidence:['birth']})));t(()=>assert(!correct(c,'harpy',{category:'bird',evidence:['fly']})));t(()=>assert(!correct(c,'boa',{category:'mammal',evidence:['birth']})));t(()=>assert(!correct(c,'frog',{category:'amphibian',evidence:['four']})));
+t(()=>{const v=structuredClone(s);v.firstExam.boa.category='mammal';assert.throws(()=>validate(c,v,s))});
+t(()=>{const v=emptyState();v.submitted=true;assert.throws(()=>validate(c,v))});
+t(()=>{const v=emptyState();v.obs.boa={first:9,last:0,attempts:1,complete:false};assert.throws(()=>validate(c,v))});
+console.log(n+' guided-learning checks passed');

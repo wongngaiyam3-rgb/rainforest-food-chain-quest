@@ -1,0 +1,283 @@
+{
+  "animals": [
+    {
+      "id": "grasshopper",
+      "name": "食葉蚱蜢",
+      "category": "insect",
+      "visible": "six",
+      "body": "食葉蚱蜢有三對腳、一對觸角，身體分為頭、胸、腹。",
+      "life": "卵孵化為若蟲，經蛻皮逐漸長大。",
+      "observe": "six",
+      "area": "胸部的三對腳及觸角"
+    },
+    {
+      "id": "iguana",
+      "name": "綠鬣蜥",
+      "category": "reptile",
+      "visible": "scales",
+      "body": "皮膚覆有乾燥鱗片，身體內有脊柱。",
+      "life": "綠鬣蜥會產卵；幼體外形與成體相似。",
+      "observe": "scales",
+      "area": "身體側面的鱗片"
+    },
+    {
+      "id": "frog",
+      "name": "食蟲樹蛙",
+      "category": "amphibian",
+      "visible": "smooth",
+      "body": "皮膚裸露、沒有鱗片，通常保持濕潤。",
+      "life": "樹蛙的生命週期通常包括卵、蝌蚪及成蛙；不同種類有差異。",
+      "observe": "wet",
+      "area": "背部裸露的皮膚"
+    },
+    {
+      "id": "harpy",
+      "name": "角雕",
+      "category": "bird",
+      "visible": "feather",
+      "body": "身體有羽毛，有喙、兩隻腳和一對翅膀。",
+      "life": "角雕產卵，以肺呼吸，幼鳥由親鳥照顧。",
+      "observe": "feather",
+      "area": "胸部與翅膀的羽毛"
+    },
+    {
+      "id": "agouti",
+      "name": "刺豚鼠",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有毛髮，身體內有脊柱。",
+      "life": "雌性刺豚鼠以乳汁餵哺幼兒。",
+      "observe": "fur",
+      "area": "身體側面及尾部的毛髮"
+    },
+    {
+      "id": "tapir",
+      "name": "中美貘",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有短毛；幼貘的斑紋和成貘不同。",
+      "life": "雌性中美貘以乳汁餵哺幼兒。",
+      "observe": "fur",
+      "area": "身體側面及尾部的毛髮"
+    },
+    {
+      "id": "peccary",
+      "name": "領西貒",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有粗毛，頸部有淺色圈紋。",
+      "life": "雌性領西貒以乳汁餵哺幼兒。",
+      "observe": "fur",
+      "area": "身體側面及尾部的毛髮"
+    },
+    {
+      "id": "coati",
+      "name": "白鼻長鼻浣熊",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有毛髮，有長尾巴和四隻腳。",
+      "life": "雌性長鼻浣熊以乳汁餵哺幼兒。",
+      "observe": "fur",
+      "area": "身體側面及尾部的毛髮"
+    },
+    {
+      "id": "toucan",
+      "name": "彩虹巨嘴鳥",
+      "category": "bird",
+      "visible": "feather",
+      "body": "身體有羽毛，大嘴是喙，有兩隻腳。",
+      "life": "彩虹巨嘴鳥產卵，幼鳥由親鳥照顧。",
+      "observe": "feather",
+      "area": "胸部與翅膀的羽毛"
+    },
+    {
+      "id": "boa",
+      "name": "蚺蛇",
+      "category": "reptile",
+      "visible": "scales",
+      "body": "身體覆有鱗片，沒有腳；身體內仍有脊柱。",
+      "life": "蚺蛇直接產出幼蛇。因此，不能單用是否產卵判斷爬行類。",
+      "observe": "scales",
+      "area": "身體側面的鱗片"
+    },
+    {
+      "id": "jaguar",
+      "name": "美洲豹",
+      "category": "mammal",
+      "visible": "fur",
+      "body": "身體有毛髮，毛皮有玫瑰形斑紋。",
+      "life": "雌性美洲豹以乳汁餵哺幼兒。",
+      "observe": "fur",
+      "area": "身體側面及尾部的毛髮"
+    }
+  ],
+  "categories": {
+    "mammal": {
+      "name": "哺乳類",
+      "feature": "身體有毛髮；雌性以乳汁餵哺幼兒。",
+      "evidence": "milk",
+      "accepted": [
+        "fur",
+        "milk"
+      ]
+    },
+    "bird": {
+      "name": "鳥類",
+      "feature": "身體有羽毛；有喙，產卵。會不會飛並非判斷鳥類的唯一依據。",
+      "evidence": "feather",
+      "accepted": [
+        "feather"
+      ]
+    },
+    "reptile": {
+      "name": "爬行類（爬蟲類）",
+      "feature": "皮膚有乾燥鱗片，以肺呼吸；有些產卵，有些直接產出幼體。",
+      "evidence": "scales",
+      "accepted": [
+        "scales"
+      ]
+    },
+    "amphibian": {
+      "name": "兩棲類",
+      "feature": "皮膚通常裸露而濕潤；許多種類的成長經過變態。不是只看牠住在哪裡。",
+      "evidence": "cycle",
+      "accepted": [
+        "wet",
+        "cycle"
+      ]
+    },
+    "insect": {
+      "name": "昆蟲類",
+      "feature": "沒有脊柱；成蟲身體分頭、胸、腹，胸部有三對腳。",
+      "evidence": "six",
+      "accepted": [
+        "six",
+        "parts"
+      ]
+    }
+  },
+  "evidence": {
+    "fur": "身體有毛髮",
+    "milk": "雌性以乳汁餵哺幼兒",
+    "feather": "身體有羽毛",
+    "scales": "乾燥鱗片，結合構造資料",
+    "wet": "皮膚裸露，資料顯示通常濕潤",
+    "cycle": "資料顯示有蝌蚪到成蛙的變態",
+    "six": "成蟲胸部有三對腳",
+    "parts": "身體分為頭、胸、腹",
+    "fly": "會飛",
+    "four": "有四隻腳",
+    "birth": "直接生出幼兒",
+    "eggs": "會產卵"
+  },
+  "features": {
+    "fur": "毛髮",
+    "feather": "羽毛",
+    "scales": "鱗片",
+    "wet": "裸露的皮膚",
+    "six": "三對腳、頭胸腹"
+  },
+  "comparisons": [
+    {
+      "id": "skin",
+      "a": "frog",
+      "b": "iguana",
+      "question": "兩者都有四隻腳。哪一項差異更能幫助我們分辨牠們？",
+      "choices": [
+        "皮膚覆蓋物與成長資料",
+        "都住在雨林",
+        "身體的綠色"
+      ],
+      "answer": 0,
+      "explain": "鬣蜥有乾燥鱗片；樹蛙皮膚裸露，通常濕潤。再閱讀生命週期資料來判斷。"
+    },
+    {
+      "id": "wings",
+      "a": "harpy",
+      "b": "grasshopper",
+      "question": "角雕和蚱蜢都有翅膀，怎樣找出鳥類？",
+      "choices": [
+        "看誰飛得高",
+        "看誰身體有羽毛",
+        "看誰會產卵"
+      ],
+      "answer": 1,
+      "explain": "角雕有羽毛；蚱蜢沒有羽毛，而且有三對腳。會飛不是鳥類的充分證據。"
+    },
+    {
+      "id": "legs",
+      "a": "boa",
+      "b": "iguana",
+      "question": "蛇沒有腳，鬣蜥有四隻腳。牠們能屬於同一類群嗎？",
+      "choices": [
+        "不能，腳的數目決定類群",
+        "不能，蛇沒有脊柱",
+        "可以，牠們都有鱗片，結構資料也支持"
+      ],
+      "answer": 2,
+      "explain": "蛇與鬣蜥都屬爬行類，身體內都有脊柱。蚺蛇直接產出幼蛇，也不是哺乳類。"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "mammal",
+      "animal": "jaguar",
+      "question": "哪項資料最能確認美洲豹屬哺乳類？",
+      "choices": [
+        "有四隻腳",
+        "用乳汁餵哺幼兒",
+        "住在陸地"
+      ],
+      "answer": 1,
+      "explain": "毛髮提供外觀線索；雌性以乳汁餵哺幼兒是哺乳類的關鍵特徵。"
+    },
+    {
+      "id": "bird",
+      "animal": "toucan",
+      "question": "角雕和巨嘴鳥最重要的共同辨識特徵是甚麼？",
+      "choices": [
+        "羽毛",
+        "會飛",
+        "有兩隻腳"
+      ],
+      "answer": 0,
+      "explain": "羽毛是辨認鳥類的重要特徵。不是所有鳥類都會飛。"
+    },
+    {
+      "id": "reptile",
+      "animal": "boa",
+      "question": "蚺蛇直接產出幼蛇，應如何判斷？",
+      "choices": [
+        "因此一定是哺乳類",
+        "沒有腳所以不是脊椎動物",
+        "結合乾燥鱗片與構造資料，屬爬行類"
+      ],
+      "answer": 2,
+      "explain": "不要只看生殖方式或腳的數目。蚺蛇有脊柱、有鱗片，屬爬行類。"
+    },
+    {
+      "id": "amphibian",
+      "animal": "frog",
+      "question": "哪組資料最支持樹蛙屬兩棲類？",
+      "choices": [
+        "綠色及四隻腳",
+        "裸露濕潤皮膚，以及蝌蚪到成蛙的成長資料",
+        "會游泳"
+      ],
+      "answer": 1,
+      "explain": "皮膚及生命週期一起提供證據；生活地點不能單獨決定類群。"
+    },
+    {
+      "id": "insect",
+      "animal": "grasshopper",
+      "question": "哪一組特徵支持蚱蜢屬昆蟲類？",
+      "choices": [
+        "會飛和產卵",
+        "六隻腳、頭胸腹，沒有脊柱",
+        "綠色及吃葉子"
+      ],
+      "answer": 1,
+      "explain": "昆蟲是無脊椎動物的一類；不是脊椎動物的第五個類群。"
+    }
+  ]
+}
