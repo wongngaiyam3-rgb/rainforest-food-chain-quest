@@ -1,0 +1,62 @@
+{
+  "jaguar": {
+    "title": "File:Jaguar head shot-edit2.jpg",
+    "url": "assets/reference/jaguar.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Jaguar_head_shot-edit2.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "artist": "Cburnett at English Wikipedia",
+    "description": "A portrait of a jaguar (Panthera onca) at the Milwaukee County Zoological Gardens in Milwaukee, Wisconsin.",
+    "remoteThumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Jaguar_head_shot-edit2.jpg/1280px-Jaguar_head_shot-edit2.jpg",
+    "label": "美洲豹（Panthera onca）",
+    "area": "耳朵、面部及頸部的毛髮"
+  },
+  "iguana": {
+    "title": "File:Endangered species Iguana Iguana from Margarita Island.jpg",
+    "url": "assets/reference/iguana.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Endangered_species_Iguana_Iguana_from_Margarita_Island.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "artist": "Wilfredor",
+    "description": "Iguana Iguana female from Margarita Island. Endangered species found in wild environment",
+    "remoteThumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Endangered_species_Iguana_Iguana_from_Margarita_Island.jpg/1280px-Endangered_species_Iguana_Iguana_from_Margarita_Island.jpg",
+    "label": "綠鬣蜥（Iguana iguana）",
+    "area": "頭部及頸側的鱗片"
+  },
+  "frog": {
+    "title": "File:Red eyed tree frog edit2.jpg",
+    "url": "assets/reference/frog.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Red_eyed_tree_frog_edit2.jpg",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "artist": "Careyjamesbalboa (Carey James Balboa)",
+    "description": "Red-eyed Tree Frog (Agalychnis callidryas), photographed near Playa Jaco in Costa Rica (retouched version).",
+    "remoteThumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Red_eyed_tree_frog_edit2.jpg/1280px-Red_eyed_tree_frog_edit2.jpg",
+    "label": "紅眼樹蛙（Agalychnis callidryas）",
+    "area": "背部及四肢裸露的皮膚"
+  },
+  "toucan": {
+    "title": "File:Ramphastos sulfuratus -Smithsonian National Zoological Park, Washington DC, USA -head-8a.jpg",
+    "url": "assets/reference/toucan.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ramphastos_sulfuratus_-Smithsonian_National_Zoological_Park,_Washington_DC,_USA_-head-8a.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "artist": "Bridget Samuels from College Park, MD",
+    "description": "A Keel-billed Toucan at Smithsonian National Zoological Park, Washington DC, USA.",
+    "remoteThumbnail": "https://upload.wikimedia.org/wikipedia/commons/4/46/Ramphastos_sulfuratus_-Smithsonian_National_Zoological_Park%2C_Washington_DC%2C_USA_-head-8a.jpg",
+    "label": "彩虹巨嘴鳥（Ramphastos sulfuratus）",
+    "area": "喙下及胸部的羽毛"
+  },
+  "grasshopper": {
+    "title": "File:American Bird Grasshopper.jpg",
+    "url": "assets/reference/grasshopper.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:American_Bird_Grasshopper.jpg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "artist": "\nhttp://www.birdphotos.com",
+    "description": "American Bird Grasshopper, also known as the American Grasshopper.",
+    "remoteThumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/American_Bird_Grasshopper.jpg/1280px-American_Bird_Grasshopper.jpg",
+    "label": "美洲蚱蜢（來源標示：American Bird Grasshopper）",
+    "area": "胸部的腳、觸角及身體分節；這個角度未必看得齊左右兩側的腳"
+  }
+}

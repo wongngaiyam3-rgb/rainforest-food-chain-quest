@@ -11,3 +11,5 @@
 部署 migration.sql 後部署本目錄 index.ts/catalog.json/rules.mjs。verify_jwt=false，函式自行驗證 fcq_sessions 不透明工作階段。前端沒有管理金鑰。
 
 測試：node backend/classification-v2/test.mjs。前端與後端 rules-v2.mjs/rules.mjs 保持同步。
+
+2026-11-04：新增五張已核對的實物參考照片及照片／插圖切換；照片來源、作者、授權及所用縮圖列於 docs/classification/photo-credits.html 和 photos-v2.json。二者經視覺檢查及放大鏡測試。原版紀錄保留。
